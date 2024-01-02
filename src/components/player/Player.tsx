@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Player.module.scss";
-import Card from "../card/card";
+import Card from "../card/Card";
 
 export interface IPlayer {
   name: string;
@@ -49,13 +49,13 @@ const Player: React.FC<IPlayer> = ({ name, symbol, setPlayerName }) => {
             ></input>
             <span className={styles["player__actions"]}>
               <button
-                className="player--action-save"
+                className="primary player--action-save"
                 onClick={handleActionSave}
               >
                 Save
               </button>
               <button
-                className="player--action-cancel"
+                className="primary player--action-cancel"
                 onClick={handleActionCancel}
               >
                 Cancel
@@ -65,7 +65,7 @@ const Player: React.FC<IPlayer> = ({ name, symbol, setPlayerName }) => {
         ) : (
           <>
             <span className={styles["player__name"]}>{name}</span>
-            <button className="player--action-edit" onClick={handleActionEdit}>
+            <button className="primary player--action-edit" onClick={handleActionEdit}>
               Edit
             </button>
           </>
