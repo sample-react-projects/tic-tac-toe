@@ -1,11 +1,13 @@
 import { useState } from "react";
 import styles from "./Gameboard.module.scss";
+import { WINNING_CONDITIONS } from "../../helper/winning-conditions";
 
 let board = Array(3)
   .fill(null)
   .map(() => Array(3).fill(null));
 
 type BoardSteps = { row: number; col: number; activePlayer: "X" | "O" };
+
 const Gameboard: React.FC<{}> = () => {
   const [steps, setSteps] = useState<Array<BoardSteps>>([]);
 
@@ -16,10 +18,27 @@ const Gameboard: React.FC<{}> = () => {
     board[row][col] = activePlayer;
   });
 
-  // Has anyone won
+  let doesWinnerExist = false;
 
-  // has it drawn
+  WINNING_CONDITIONS.forEach((condition) => {
+    if (
+      board[condition[0].row][condition[0].col] &&
+      board[condition[0].row][condition[0].col] ===
+        board[condition[1].row][condition[1].col] &&
+      board[condition[0].row][condition[0].col] ===
+        board[condition[2].row][condition[2].col]
+    ) {
+      doesWinnerExist = true;
+      //break;
+    }
+  });
 
+  let hasDrawn = false;
+
+  if (!doesWinnerExist && steps.length === 9) {
+    hasDrawn = true;
+  }
+console.log(doesWinnerExist, hasDrawn);
   function resetBoard() {
     board = Array(3)
       .fill(null)
