@@ -12,4 +12,25 @@ body {
   background-color: #fafafa;
 }
 
+h2.title {
+  text-align: center;
+  margin: 1rem;
+}
 
+button {
+  all: unset;
+  background-color: #005dab;
+  border-radius: 0.25rem;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+
+  &:hover {
+    background-color: #0021aa;
+  }
+}
+
+input[type="text"] {
+  border: 1px solid #aaa;
+  padding: 0.25rem 0.5rem;
+}
