@@ -16,16 +16,15 @@ export default function Players() {
   }
 
   return (
-   
-      <div className={styles.players}>
-        {Object.entries(players).map(([symbol, name]) => (
-          <Player
-            symbol={symbol}
-            name={name}
-            setPlayerName={updatePlayerName}
-          ></Player>
-        ))}
-      </div>
-    
+    <div className={styles.players}>
+      {Object.entries(players).map(([symbol, name]) => (
+        <Player
+          key={symbol}
+          symbol={symbol}
+          name={name}
+          setPlayerName={updatePlayerName}
+        ></Player>
+      ))}
+    </div>
   );
 }
