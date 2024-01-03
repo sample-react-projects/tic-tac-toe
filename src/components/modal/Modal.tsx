@@ -15,7 +15,7 @@ const Modal: React.FC<IModal> = ({
     <div className={styles.modal__mask}>
       <div className={styles.modal__content}>
         <div className={styles.modal__text}>{message}</div>
-        <button className="primary" onClick={handleActionClick}>
+        <button className={styles.primary} onClick={handleActionClick}>
           {actionLabel}
         </button>
       </div>
