@@ -1,30 +1,30 @@
-.container {
-  position: relative;
+.gameboard {
   padding-top: 100%;
+  position: relative;
   width: 100%;
 
-  .cells {
+  &__cells {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
     height: 100%;
     left: 0;
     position: absolute;
     top: 0;
     width: 100%;
 
-    .cell {
+    &__cell {
       background-color: bisque;
       font-size: 4rem;
       font-weight: bold;
       position: relative;
+    }
 
-      .symbol {
-        left: 50%;
-        position: absolute;
-        top: 50%;
-        transform: translate(-50%, -50%);
-      }
+    &__symbol {
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }

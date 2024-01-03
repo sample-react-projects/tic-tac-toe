@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styles from "./Player.module.scss";
 import Card from "../card/Card";
+import { PlayerSymbol } from "../app/App";
 
 export interface IPlayer {
   name: string;
-  symbol: string;
-  setPlayerName: (symbol: string, name: string) => void;
+  symbol: PlayerSymbol;
+  setPlayerName: (symbol: PlayerSymbol, name: string) => void;
 }
 
 const Player: React.FC<IPlayer> = ({ name, symbol, setPlayerName }) => {
@@ -65,7 +66,10 @@ const Player: React.FC<IPlayer> = ({ name, symbol, setPlayerName }) => {
         ) : (
           <>
             <span className={styles["player__name"]}>{name}</span>
-            <button className="primary player--action-edit" onClick={handleActionEdit}>
+            <button
+              className="primary player--action-edit"
+              onClick={handleActionEdit}
+            >
               Edit
             </button>
           </>
