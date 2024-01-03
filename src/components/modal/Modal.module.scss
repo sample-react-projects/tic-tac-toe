@@ -1,0 +1,27 @@
+.modal {
+  &__mask {
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+  }
+
+  &__content {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    left: 50%;
+    max-width: 400px;
+    padding: 1rem;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100vw - 2rem);
+  }
+
+  &__text {
+    margin-bottom: 1rem;
+  }
+}
