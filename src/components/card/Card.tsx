@@ -1,6 +1,9 @@
 import styles from "./Card.module.scss";
 
-const Card: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+interface ICard {
+  children: React.ReactNode;
+}
+const Card: React.FC<ICard> = ({ children }) => {
   return <div className={styles.card}>{children}</div>;
 };
 
