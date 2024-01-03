@@ -10,7 +10,7 @@ export type PlayerSymbol = "X" | "O";
 export type BoardSteps = {
   row: number;
   col: number;
-  activePlayer: PlayerSymbol;
+  activePlayerSymbol: PlayerSymbol;
 };
 
 let board = Array(3)
@@ -39,17 +39,17 @@ const App: React.FC<{}> = () => {
   let winner: PlayerSymbol | undefined;
   let hasDrawn = false;
 
-  steps.forEach(({ row, col, activePlayer }) => {
-    board[row][col] = activePlayer;
+  steps.forEach(({ row, col, activePlayerSymbol }) => {
+    board[row][col] = activePlayerSymbol;
   });
 
-  const activePlayer =
-    steps.length && steps.at(-1)?.activePlayer === "X" ? "O" : "X";
+  const activePlayerSymbol =
+    steps.length && steps.at(-1)?.activePlayerSymbol === "X" ? "O" : "X";
 
   const winnerExists = checkWinnerExists();
 
   if (winnerExists) {
-    winner = activePlayer === "X" ? "O" : "X";
+    winner = activePlayerSymbol === "X" ? "O" : "X";
   }
 
   if (!winner && steps.length === 9) {
@@ -77,7 +77,7 @@ const App: React.FC<{}> = () => {
       <Players></Players>
       <Card>
         <Gameboard
-          activePlayer={activePlayer}
+          activePlayerSymbol={activePlayerSymbol}
           board={board}
           setSteps={setSteps}
         ></Gameboard>
