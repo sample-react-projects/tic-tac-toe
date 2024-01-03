@@ -5,6 +5,7 @@ interface IModal {
   actionLabel: string;
   handleActionClick: () => void;
 }
+
 const Modal: React.FC<IModal> = ({
   actionLabel,
   handleActionClick,
