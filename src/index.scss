@@ -16,24 +16,3 @@ h1.title {
   text-align: center;
   margin: 1rem;
 }
-
-button {
-  all: unset;
-  border-radius: 0.25rem;
-  cursor: pointer;
-
-  &.primary {
-    background-color: #005dab;
-    color: #fff;
-    padding: 0.25rem 0.5rem;
-
-    &:hover {
-      background-color: #0021aa;
-    }
-  }
-}
-
-input[type="text"] {
-  border: 1px solid #aaa;
-  padding: 0.25rem 0.5rem;
-}

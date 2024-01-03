@@ -12,19 +12,19 @@
     position: absolute;
     top: 0;
     width: 100%;
+  }
 
-    &__cell {
-      background-color: bisque;
-      font-size: 4rem;
-      font-weight: bold;
-      position: relative;
-    }
+  &__cell {
+    background-color: bisque;
+    font-size: 4rem;
+    font-weight: bold;
+    position: relative;
+  }
 
-    &__symbol {
-      left: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
+  &__symbol {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 }

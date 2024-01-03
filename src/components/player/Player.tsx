@@ -50,13 +50,13 @@ const Player: React.FC<IPlayer> = ({ name, symbol, setPlayerName }) => {
             ></input>
             <span className={styles["player__actions"]}>
               <button
-                className="primary player--action-save"
+                className={styles.primary}
                 onClick={handleActionSave}
               >
                 Save
               </button>
               <button
-                className="primary player--action-cancel"
+                className={styles.primary}
                 onClick={handleActionCancel}
               >
                 Cancel
@@ -67,7 +67,7 @@ const Player: React.FC<IPlayer> = ({ name, symbol, setPlayerName }) => {
           <>
             <span className={styles["player__name"]}>{name}</span>
             <button
-              className="primary player--action-edit"
+              className={styles.primary}
               onClick={handleActionEdit}
             >
               Edit
