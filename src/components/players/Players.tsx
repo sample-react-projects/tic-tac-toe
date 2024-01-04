@@ -1,4 +1,5 @@
-import { PlayerSymbol } from "../app/App";
+
+import { PlayerSymbol } from "../../types/PlayerSymbol";
 import Player from "../player/Player";
 import Card from "../util/card/Card";
 import styles from "./Players.module.scss";

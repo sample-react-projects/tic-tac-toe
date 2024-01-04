@@ -5,13 +5,8 @@ import styles from "./App.module.scss";
 import { WINNING_CONDITIONS } from "../../helper/winning-conditions";
 import Card from "../util/card/Card";
 import Modal from "../util/modal/Modal";
-
-export type PlayerSymbol = "X" | "O";
-export type BoardSteps = {
-  row: number;
-  col: number;
-  activePlayer: PlayerSymbol;
-};
+import { BoardSteps } from "../../types/BoardSteps";
+import { PlayerSymbol } from "../../types/PlayerSymbol";
 
 function getEmptyBoard() {
   return Array(3)
