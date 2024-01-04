@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "./Player.module.scss";
-import Card from "../card/Card";
 import { PlayerSymbol } from "../app/App";
 
 export interface IPlayer {
@@ -42,37 +41,35 @@ const Player: React.FC<IPlayer> = ({ name, symbol, setPlayers }) => {
   }
 
   return (
-    <Card>
-      <div className={styles.player}>
-        <span className="player__symbol">({symbol})</span>
-        {isEditing ? (
-          <>
-            <input
-              className={styles["player--edit"]}
-              type="text"
-              value={editedName}
-              placeholder="ex. John"
-              onInput={handlePlayerNameInput}
-            ></input>
-            <span className={styles["player__actions"]}>
-              <button className={styles.primary} onClick={handleActionSave}>
-                Save
-              </button>
-              <button className={styles.primary} onClick={handleActionCancel}>
-                Cancel
-              </button>
-            </span>
-          </>
-        ) : (
-          <>
-            <span className={styles["player__name"]}>{name}</span>
-            <button className={styles.primary} onClick={handleActionEdit}>
-              Edit
+    <div className={styles.player}>
+      <span className="player__symbol">({symbol})</span>
+      {isEditing ? (
+        <>
+          <input
+            className={styles["player--edit"]}
+            type="text"
+            value={editedName}
+            placeholder="ex. John"
+            onInput={handlePlayerNameInput}
+          ></input>
+          <span className={styles["player__actions"]}>
+            <button className={styles.primary} onClick={handleActionSave}>
+              Save
             </button>
-          </>
-        )}
-      </div>
-    </Card>
+            <button className={styles.primary} onClick={handleActionCancel}>
+              Cancel
+            </button>
+          </span>
+        </>
+      ) : (
+        <>
+          <span className={styles["player__name"]}>{name}</span>
+          <button className={styles.primary} onClick={handleActionEdit}>
+            Edit
+          </button>
+        </>
+      )}
+    </div>
   );
 };
 
