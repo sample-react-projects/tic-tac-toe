@@ -2,18 +2,18 @@ import styles from "./Gameboard.module.scss";
 import { BoardSteps, PlayerSymbol } from "../app/App";
 
 interface IGameboard {
-  activePlayerSymbol: PlayerSymbol;
+  activePlayer: PlayerSymbol;
   board: string[][];
   setSteps: React.Dispatch<React.SetStateAction<BoardSteps[]>>;
 }
 
 const Gameboard: React.FC<IGameboard> = ({
-  activePlayerSymbol,
+  activePlayer,
   board,
   setSteps,
 }) => {
   function handleClick(row: number, col: number) {
-    setSteps((prevSteps) => [...prevSteps, { row, col, activePlayerSymbol }]);
+    setSteps((prevSteps) => [...prevSteps, { row, col, activePlayer }]);
   }
 
   return (
