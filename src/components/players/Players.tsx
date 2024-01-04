@@ -6,12 +6,20 @@ import styles from "./Players.module.scss";
 interface IPlayers {
   activePlayer: PlayerSymbol;
   players: Record<PlayerSymbol, string>;
-  setPlayers: React.Dispatch<
-    React.SetStateAction<Record<PlayerSymbol, string>>
-  >;
+  updatePlayer: (symbol: PlayerSymbol, updatedName: string) => void;
 }
 
-const Players: React.FC<IPlayers> = ({ activePlayer, players, setPlayers }) => {
+const Players: React.FC<IPlayers> = ({
+  activePlayer,
+  players,
+  updatePlayer,
+}) => {
+  function setPlayerName(symbol: PlayerSymbol) {
+    return function (name: string) {
+      updatePlayer(symbol, name);
+    };
+  }
+
   return (
     <div className={styles.players}>
       {(Object.entries(players) as [PlayerSymbol, string][]).map(
@@ -19,10 +27,11 @@ const Players: React.FC<IPlayers> = ({ activePlayer, players, setPlayers }) => {
           <Card active={activePlayer === symbol}>
             <Player
               key={symbol}
-              symbol={symbol}
               name={name}
-              setPlayers={setPlayers}
-            ></Player>
+              updatePlayer={setPlayerName(symbol)}
+            >
+              {symbol}
+            </Player>
           </Card>
         )
       )}
