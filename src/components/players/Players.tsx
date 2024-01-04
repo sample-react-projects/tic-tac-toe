@@ -1,21 +1,15 @@
-import { useState } from "react";
+import { PlayerSymbol } from "../app/App";
 import Player from "../player/Player";
 import styles from "./Players.module.scss";
-import { PlayerSymbol } from "../app/App";
 
-export default function Players() {
-  const [players, setPlayers] = useState<Record<PlayerSymbol, string>>({
-    X: "Player 1",
-    O: "Player 2",
-  });
+interface IPlayers {
+  players: Record<PlayerSymbol, string>;
+  setPlayers: React.Dispatch<
+    React.SetStateAction<Record<PlayerSymbol, string>>
+  >;
+}
 
-  function updatePlayerName(symbol: PlayerSymbol, name: string) {
-    setPlayers((prevPlayersState) => {
-      prevPlayersState[symbol] = name;
-      return { ...prevPlayersState };
-    });
-  }
-
+const Players: React.FC<IPlayers> = ({ players, setPlayers }) => {
   return (
     <div className={styles.players}>
       {(Object.entries(players) as [PlayerSymbol, string][]).map(
@@ -24,10 +18,12 @@ export default function Players() {
             key={symbol}
             symbol={symbol}
             name={name}
-            setPlayerName={updatePlayerName}
+            setPlayers={setPlayers}
           ></Player>
         )
       )}
     </div>
   );
-}
+};
+
+export default Players;
