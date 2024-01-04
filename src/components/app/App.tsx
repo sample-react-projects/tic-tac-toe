@@ -13,9 +13,13 @@ export type BoardSteps = {
   activePlayer: PlayerSymbol;
 };
 
-let board = Array(3)
-  .fill(null)
-  .map(() => Array<string>(3).fill(""));
+function getEmptyBoard() {
+  return Array(3)
+    .fill(null)
+    .map(() => Array<string>(3).fill(""));
+}
+
+let board = getEmptyBoard();
 
 function checkWinnerExists() {
   for (let index = 0; index < WINNING_CONDITIONS.length; index++) {
@@ -43,29 +47,25 @@ const App: React.FC<{}> = () => {
 
   let winner: string = "";
   let hasDrawn: boolean = false;
+  let activePlayer: PlayerSymbol =
+    steps.at(-1)?.activePlayer === "X" ? "X" : "O";
 
   steps.forEach(({ row, col, activePlayer }) => {
     board[row][col] = activePlayer;
   });
 
-  const activePlayer =
-    steps.length && steps.at(-1)?.activePlayer === "X" ? "O" : "X";
-
   const winnerExists = checkWinnerExists();
 
   if (winnerExists) {
-    winner = activePlayer === "X" ? players["O"] : players["X"];
-  }
-
-  if (!winner && steps.length === 9) {
+    winner = players[activePlayer];
+  } else if (steps.length === 9) {
     hasDrawn = true;
   }
 
+  activePlayer = activePlayer === "X" ? "O" : "X";
+
   function restartGame() {
-    board = Array(3)
-      .fill(null)
-      .map(() => Array(3).fill(null));
-    setSteps([]);
+    board = getEmptyBoard();
   }
 
   function updateSteps(row: number, col: number) {
