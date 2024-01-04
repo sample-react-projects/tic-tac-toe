@@ -6,10 +6,12 @@ import { PlayerSymbol } from "../app/App";
 export interface IPlayer {
   name: string;
   symbol: PlayerSymbol;
-  setPlayerName: (symbol: PlayerSymbol, name: string) => void;
+  setPlayers: React.Dispatch<
+    React.SetStateAction<Record<PlayerSymbol, string>>
+  >;
 }
 
-const Player: React.FC<IPlayer> = ({ name, symbol, setPlayerName }) => {
+const Player: React.FC<IPlayer> = ({ name, symbol, setPlayers }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editedName, setEditedName] = useState<string>(name);
 
@@ -27,7 +29,11 @@ const Player: React.FC<IPlayer> = ({ name, symbol, setPlayerName }) => {
   };
 
   const handleActionSave = () => {
-    setPlayerName(symbol, editedName);
+    setPlayers((prevPlayersState) => {
+      prevPlayersState[symbol] = editedName;
+      return { ...prevPlayersState };
+    });
+
     toggleEditState();
   };
 
@@ -49,16 +55,10 @@ const Player: React.FC<IPlayer> = ({ name, symbol, setPlayerName }) => {
               onInput={handlePlayerNameInput}
             ></input>
             <span className={styles["player__actions"]}>
-              <button
-                className={styles.primary}
-                onClick={handleActionSave}
-              >
+              <button className={styles.primary} onClick={handleActionSave}>
                 Save
               </button>
-              <button
-                className={styles.primary}
-                onClick={handleActionCancel}
-              >
+              <button className={styles.primary} onClick={handleActionCancel}>
                 Cancel
               </button>
             </span>
@@ -66,10 +66,7 @@ const Player: React.FC<IPlayer> = ({ name, symbol, setPlayerName }) => {
         ) : (
           <>
             <span className={styles["player__name"]}>{name}</span>
-            <button
-              className={styles.primary}
-              onClick={handleActionEdit}
-            >
+            <button className={styles.primary} onClick={handleActionEdit}>
               Edit
             </button>
           </>
