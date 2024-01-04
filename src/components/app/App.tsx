@@ -2,36 +2,13 @@ import { useState } from "react";
 import Gameboard from "../gameboard/Gameboard";
 import Players from "../players/Players";
 import styles from "./App.module.scss";
-import { WINNING_CONDITIONS } from "../../helper/winning-conditions";
 import Card from "../util/card/Card";
 import Modal from "../util/modal/Modal";
 import { BoardSteps } from "../../types/BoardSteps";
 import { PlayerSymbol } from "../../types/PlayerSymbol";
-
-function getEmptyBoard() {
-  return Array(3)
-    .fill(null)
-    .map(() => Array<string>(3).fill(""));
-}
+import { checkWinnerExists, getEmptyBoard } from "./App.helper";
 
 let board = getEmptyBoard();
-
-function checkWinnerExists() {
-  for (let index = 0; index < WINNING_CONDITIONS.length; index++) {
-    const condition = WINNING_CONDITIONS[index];
-    if (
-      board[condition[0].row][condition[0].col] &&
-      board[condition[0].row][condition[0].col] ===
-        board[condition[1].row][condition[1].col] &&
-      board[condition[0].row][condition[0].col] ===
-        board[condition[2].row][condition[2].col]
-    ) {
-      return true;
-    }
-  }
-
-  return false;
-}
 
 const App: React.FC<{}> = () => {
   const [steps, setSteps] = useState<Array<BoardSteps>>([]);
@@ -49,7 +26,7 @@ const App: React.FC<{}> = () => {
     board[row][col] = activePlayer;
   });
 
-  const winnerExists = checkWinnerExists();
+  const winnerExists = checkWinnerExists(board);
 
   if (winnerExists) {
     winner = players[activePlayer];
