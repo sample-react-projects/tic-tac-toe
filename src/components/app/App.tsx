@@ -38,6 +38,7 @@ const App: React.FC<{}> = () => {
 
   function restartGame() {
     board = getEmptyBoard();
+    setSteps([]);
   }
 
   function updateSteps(row: number, col: number) {
