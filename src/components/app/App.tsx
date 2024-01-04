@@ -68,6 +68,10 @@ const App: React.FC<{}> = () => {
     setSteps([]);
   }
 
+  function updateSteps(row: number, col: number) {
+    setSteps((prevSteps) => [...prevSteps, { row, col, activePlayer }]);
+  }
+
   const modalContent =
     hasDrawn || winner ? (
       <Modal
@@ -85,11 +89,7 @@ const App: React.FC<{}> = () => {
         setPlayers={setPlayers}
       ></Players>
       <Card>
-        <Gameboard
-          activePlayer={activePlayer}
-          board={board}
-          setSteps={setSteps}
-        ></Gameboard>
+        <Gameboard board={board} updateSteps={updateSteps}></Gameboard>
       </Card>
       {modalContent}
     </div>
