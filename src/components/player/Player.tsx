@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import styles from "./Player.module.scss";
-import { PlayerSymbol } from "../app/App";
 
 export interface IPlayer {
+  children: React.ReactNode;
   name: string;
-  symbol: PlayerSymbol;
-  setPlayers: React.Dispatch<
-    React.SetStateAction<Record<PlayerSymbol, string>>
-  >;
+  updatePlayer: (updatedName: string) => void;
 }
 
-const Player: React.FC<IPlayer> = ({ name, symbol, setPlayers }) => {
+const Player: React.FC<IPlayer> = ({ children, name, updatePlayer }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editedName, setEditedName] = useState<string>(name);
 
@@ -28,11 +25,7 @@ const Player: React.FC<IPlayer> = ({ name, symbol, setPlayers }) => {
   };
 
   const handleActionSave = () => {
-    setPlayers((prevPlayersState) => {
-      prevPlayersState[symbol] = editedName;
-      return { ...prevPlayersState };
-    });
-
+    updatePlayer(editedName);
     toggleEditState();
   };
 
@@ -42,7 +35,7 @@ const Player: React.FC<IPlayer> = ({ name, symbol, setPlayers }) => {
 
   return (
     <div className={styles.player}>
-      <span className="player__symbol">({symbol})</span>
+      <span className="player__symbol">({children})</span>
       {isEditing ? (
         <>
           <input
