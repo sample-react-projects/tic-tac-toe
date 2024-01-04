@@ -1,4 +1,3 @@
-
 import { PlayerSymbol } from "../../types/PlayerSymbol";
 import Player from "../player/Player";
 import Card from "../util/card/Card";
@@ -25,12 +24,8 @@ const Players: React.FC<IPlayers> = ({
     <div className={styles.players}>
       {(Object.entries(players) as [PlayerSymbol, string][]).map(
         ([symbol, name]) => (
-          <Card active={activePlayer === symbol}>
-            <Player
-              key={symbol}
-              name={name}
-              updatePlayer={setPlayerName(symbol)}
-            >
+          <Card key={symbol} active={activePlayer === symbol}>
+            <Player name={name} updatePlayer={setPlayerName(symbol)}>
               {symbol}
             </Player>
           </Card>
