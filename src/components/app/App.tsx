@@ -4,7 +4,7 @@ import Gameboard from "../gameboard/Gameboard";
 import Players from "../players/Players";
 import styles from "./App.module.scss";
 import { WINNING_CONDITIONS } from "../../helper/winning-conditions";
-import Modal from "../modal/Modal";
+import Modal from "../util/modal/Modal";
 
 export type PlayerSymbol = "X" | "O";
 export type BoardSteps = {
@@ -36,8 +36,13 @@ function checkWinnerExists() {
 
 const App: React.FC<{}> = () => {
   const [steps, setSteps] = useState<Array<BoardSteps>>([]);
-  let winner: PlayerSymbol | undefined;
-  let hasDrawn = false;
+  const [players, setPlayers] = useState<Record<PlayerSymbol, string>>({
+    X: "Player 1",
+    O: "Player 2",
+  });
+
+  let winner: string = "";
+  let hasDrawn: boolean = false;
 
   steps.forEach(({ row, col, activePlayerSymbol }) => {
     board[row][col] = activePlayerSymbol;
@@ -49,7 +54,7 @@ const App: React.FC<{}> = () => {
   const winnerExists = checkWinnerExists();
 
   if (winnerExists) {
-    winner = activePlayerSymbol === "X" ? "O" : "X";
+    winner = activePlayerSymbol === "X" ? players["O"] : players["X"];
   }
 
   if (!winner && steps.length === 9) {
@@ -74,7 +79,7 @@ const App: React.FC<{}> = () => {
 
   return (
     <div className={styles.container}>
-      <Players></Players>
+      <Players players={players} setPlayers={setPlayers}></Players>
       <Card>
         <Gameboard
           activePlayerSymbol={activePlayerSymbol}
