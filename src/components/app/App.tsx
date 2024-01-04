@@ -1,16 +1,16 @@
 import { useState } from "react";
-import Card from "../card/Card";
 import Gameboard from "../gameboard/Gameboard";
 import Players from "../players/Players";
 import styles from "./App.module.scss";
 import { WINNING_CONDITIONS } from "../../helper/winning-conditions";
+import Card from "../util/card/Card";
 import Modal from "../util/modal/Modal";
 
 export type PlayerSymbol = "X" | "O";
 export type BoardSteps = {
   row: number;
   col: number;
-  activePlayerSymbol: PlayerSymbol;
+  activePlayer: PlayerSymbol;
 };
 
 let board = Array(3)
@@ -44,17 +44,17 @@ const App: React.FC<{}> = () => {
   let winner: string = "";
   let hasDrawn: boolean = false;
 
-  steps.forEach(({ row, col, activePlayerSymbol }) => {
-    board[row][col] = activePlayerSymbol;
+  steps.forEach(({ row, col, activePlayer }) => {
+    board[row][col] = activePlayer;
   });
 
-  const activePlayerSymbol =
-    steps.length && steps.at(-1)?.activePlayerSymbol === "X" ? "O" : "X";
+  const activePlayer =
+    steps.length && steps.at(-1)?.activePlayer === "X" ? "O" : "X";
 
   const winnerExists = checkWinnerExists();
 
   if (winnerExists) {
-    winner = activePlayerSymbol === "X" ? players["O"] : players["X"];
+    winner = activePlayer === "X" ? players["O"] : players["X"];
   }
 
   if (!winner && steps.length === 9) {
@@ -79,10 +79,14 @@ const App: React.FC<{}> = () => {
 
   return (
     <div className={styles.container}>
-      <Players players={players} setPlayers={setPlayers}></Players>
+      <Players
+        activePlayer={activePlayer}
+        players={players}
+        setPlayers={setPlayers}
+      ></Players>
       <Card>
         <Gameboard
-          activePlayerSymbol={activePlayerSymbol}
+          activePlayer={activePlayer}
           board={board}
           setSteps={setSteps}
         ></Gameboard>
